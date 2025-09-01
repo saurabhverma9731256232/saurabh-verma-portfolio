@@ -47,12 +47,12 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <button
-              onClick={() => scrollToSection("#home")}
-              className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
-            >
-              SV
-            </button>
+          <button
+            onClick={() => scrollToSection("#home")}
+            className="text-xl font-bold bg-gradient-hero bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+          >
+            Saurabh Verma
+          </button>
           </div>
 
           {/* Desktop Navigation */}
@@ -70,7 +70,18 @@ const Navigation = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex">
-            <Button size="sm" className="shadow-glow">
+            <Button 
+              size="sm" 
+              className="shadow-glow"
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/resume.pdf';
+                link.download = 'Saurabh_Verma_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+            >
               <FileDown className="w-4 h-4 mr-2" />
               Resume
             </Button>
@@ -99,7 +110,19 @@ const Navigation = () => {
                 </button>
               ))}
               <div className="pt-3 border-t border-glass-border">
-                <Button size="sm" className="w-full shadow-glow">
+                <Button 
+                  size="sm" 
+                  className="w-full shadow-glow"
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = '/resume.pdf';
+                    link.download = 'Saurabh_Verma_Resume.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    setIsMenuOpen(false);
+                  }}
+                >
                   <FileDown className="w-4 h-4 mr-2" />
                   Download Resume
                 </Button>

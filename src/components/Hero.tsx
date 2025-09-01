@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Mail, ExternalLink, FileDown } from "lucide-react";
+import { TypeAnimation } from 'react-type-animation';
 import profileImage from "@/assets/profile-image.jpg";
 
 const Hero = () => {
@@ -26,11 +27,23 @@ const Hero = () => {
                 <Badge variant="secondary" className="text-sm px-4 py-2">
                   BTech ECE • NIT Mizoram
                 </Badge>
-                <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent">
-                  Saurabh
-                  <span className="block bg-gradient-hero bg-clip-text text-transparent">
-                    Verma
-                  </span>
+                <h1 className="text-5xl lg:text-7xl font-bold">
+                  <TypeAnimation
+                    sequence={[
+                      'Saurabh Verma',
+                      1000,
+                      'Web Developer',
+                      1000,
+                      'Full Stack Developer',
+                      1000,
+                      'VLSI Designer',
+                      1000,
+                    ]}
+                    wrapper="span"
+                    speed={50}
+                    className="bg-gradient-hero bg-clip-text text-transparent"
+                    repeat={Infinity}
+                  />
                 </h1>
                 <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed">
                   Full Stack Developer & Electronics Engineer crafting innovative web solutions 
@@ -46,11 +59,27 @@ const Hero = () => {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="shadow-glow">
+                <Button 
+                  size="lg" 
+                  className="shadow-glow"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   <Mail className="w-5 h-5 mr-2" />
                   Get In Touch
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => {
+                    // Create a downloadable resume - you'll need to add your actual resume file to public folder
+                    const link = document.createElement('a');
+                    link.href = '/resume.pdf'; // You need to add resume.pdf to public folder
+                    link.download = 'Saurabh_Verma_Resume.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                >
                   <FileDown className="w-5 h-5 mr-2" />
                   Download CV
                 </Button>
