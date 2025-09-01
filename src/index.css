@@ -8,35 +8,56 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 17% 7%;
+    --foreground: 220 14% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 15% 10%;
+    --card-foreground: 220 14% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 15% 10%;
+    --popover-foreground: 220 14% 96%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 17% 7%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 220 14% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 220 17% 7%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 14% 96%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom portfolio colors */
+    --hero-gradient-start: 217 91% 60%;
+    --hero-gradient-end: 240 100% 70%;
+    --section-gradient: 220 20% 8%;
+    --glass-bg: 220 15% 10%;
+    --glass-border: 217 32% 20%;
+    --tech-accent: 195 100% 60%;
+    --success-accent: 150 100% 60%;
+    
+    /* Shadows and effects */
+    --shadow-glow: 0 0 40px hsl(var(--hero-gradient-start) / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(220 17% 3% / 0.5);
+    --shadow-elevated: 0 20px 40px -15px hsl(220 17% 3% / 0.7);
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--hero-gradient-start)), hsl(var(--hero-gradient-end)));
+    --gradient-section: linear-gradient(180deg, hsl(var(--section-gradient)), hsl(220 15% 10%));
+    --gradient-border: linear-gradient(90deg, hsl(var(--hero-gradient-start)), hsl(var(--tech-accent)));
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
