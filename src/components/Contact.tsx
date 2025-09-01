@@ -1,12 +1,64 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Send } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Send, CheckCircle } from "lucide-react";
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate form submission
+    setTimeout(() => {
+      toast({
+        title: "Message Sent Successfully!",
+        description: "Thank you for your message. I'll get back to you soon.",
+        duration: 5000,
+      });
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      setIsSubmitting(false);
+    }, 1500);
+  };
+
+  const scrollToContactForm = () => {
+    const form = document.querySelector('#contact-form');
+    if (form) {
+      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleCallMe = () => {
+    window.open('tel:+919721256232', '_self');
+  };
+
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
@@ -135,25 +187,33 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <Card className="bg-glass border-glass-border backdrop-blur-sm animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <Card id="contact-form" className="bg-glass border-glass-border backdrop-blur-sm animate-slide-up" style={{ animationDelay: '0.2s' }}>
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-6">Send Message</h3>
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name</Label>
                       <Input 
-                        id="firstName" 
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
                         placeholder="John" 
                         className="bg-card border-glass-border"
+                        required
                       />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName">Last Name</Label>
                       <Input 
-                        id="lastName" 
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
                         placeholder="Doe" 
                         className="bg-card border-glass-border"
+                        required
                       />
                     </div>
                   </div>
@@ -161,35 +221,61 @@ const Contact = () => {
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
                     <Input 
-                      id="email" 
-                      type="email" 
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                       placeholder="john@example.com" 
                       className="bg-card border-glass-border"
+                      required
                     />
                   </div>
                   
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
                     <Input 
-                      id="subject" 
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
                       placeholder="Let's discuss a project" 
                       className="bg-card border-glass-border"
+                      required
                     />
                   </div>
                   
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
                     <Textarea 
-                      id="message" 
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
                       placeholder="Your message here..." 
                       rows={5}
                       className="bg-card border-glass-border resize-none"
+                      required
                     />
                   </div>
                   
-                  <Button className="w-full shadow-glow" size="lg">
-                    <Send className="w-5 h-5 mr-2" />
-                    Send Message
+                  <Button 
+                    type="submit" 
+                    className="w-full shadow-glow" 
+                    size="lg"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 mr-2 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>
@@ -205,11 +291,11 @@ const Contact = () => {
                 or just want to say hello, I'd love to hear from you.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
-                <Button size="lg" className="shadow-glow">
+                <Button size="lg" className="shadow-glow" onClick={scrollToContactForm}>
                   <Mail className="w-5 h-5 mr-2" />
                   Email Me
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" onClick={handleCallMe}>
                   <Phone className="w-5 h-5 mr-2" />
                   Call Me
                 </Button>
