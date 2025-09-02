@@ -56,7 +56,7 @@ const Contact = () => {
   };
 
   const handleCallMe = () => {
-    window.open('tel:+919721256232', '_self');
+    scrollToContactForm();
   };
 
   const contactInfo = [
