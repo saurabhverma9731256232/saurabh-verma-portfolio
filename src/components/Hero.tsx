@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Mail, ExternalLink, FileDown } from "lucide-react";
 import { TypeAnimation } from 'react-type-animation';
-import profileImage from "@/assets/profile-image.jpg";
 
 const Hero = () => {
   return (
@@ -117,7 +116,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-hero rounded-2xl blur-2xl opacity-30 animate-pulse-slow" />
                 <div className="relative bg-glass border border-glass-border rounded-2xl p-8 backdrop-blur-sm">
                   <img
-                    src={profileImage}
+                    src="/lovable-uploads/1a068a7a-576f-4a5b-84ae-f67f39e95078.png"
                     alt="Saurabh Verma"
                     className="w-80 h-80 rounded-xl object-cover shadow-elevated"
                   />
