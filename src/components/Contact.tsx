@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { submitContactForm } from "@/lib/contact";
 import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink, Send, CheckCircle } from "lucide-react";
 
 const Contact = () => {
@@ -28,8 +29,9 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      await submitContactForm(formData);
+      
       toast({
         title: "Message Sent Successfully!",
         description: "Thank you for your message. I'll get back to you soon.",
@@ -44,8 +46,16 @@ const Contact = () => {
         subject: '',
         message: ''
       });
+    } catch (error) {
+      toast({
+        title: "Error Sending Message",
+        description: error instanceof Error ? error.message : "Please try again later.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   const scrollToContactForm = () => {
