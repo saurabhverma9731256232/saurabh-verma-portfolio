@@ -120,9 +120,6 @@ const Hero = () => {
                     alt="Saurabh Verma"
                     className="w-80 h-80 rounded-xl object-cover shadow-elevated"
                   />
-                  <div className="absolute -top-4 -right-4 bg-success rounded-full p-3 shadow-card animate-float">
-                    <div className="w-4 h-4 bg-white rounded-full" />
-                  </div>
                 </div>
               </div>
             </div>
